@@ -1,7 +1,4 @@
-<<<<<<< HEAD
+flask
 streamlit
 requests
-=======
-pylint>=3.0.0
-bandit>=1.7.5
->>>>>>> debt-origin/main
+
