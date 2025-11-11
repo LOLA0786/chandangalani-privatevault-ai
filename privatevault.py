@@ -1,7 +1,15 @@
-import hashlib
+if __name__ == "__main__":
+    import os
+    import sys
+    import traceback
 
-def encrypt(data: str) -> str:
-    return "ENC_" + hashlib.sha256(data.encode()).hexdigest()
-
-def generate_zk_proof(response) -> str:
-    return "ZK_PROOF_DEMO_ONLY_ABC123"
+    try:
+        port = int(os.environ.get("PORT", 10000))
+        print(f"🚀 Starting Flask on port {port} ...")
+        sys.stdout.flush()           # force log flush
+        app.run(host="0.0.0.0", port=port)
+    except Exception as e:
+        print("🔥 ERROR during startup:", e)
+        traceback.print_exc()
+        sys.stdout.flush()
+        open("render_crash.log", "w").write(traceback.format_exc())
