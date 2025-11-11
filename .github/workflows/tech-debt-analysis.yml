@@ -1,0 +1,34 @@
+name: Technical Debt Analysis
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: pip install pylint bandit
+    
+    - name: Run Analysis
+      run: |
+        echo "🔍 Running Technical Debt Analysis..."
+        python tools/tech_debt_analyzer.py src -o tech-debt-report.json || true
+    
+    - name: Upload Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: tech-debt-report
+        path: tech-debt-report.json
