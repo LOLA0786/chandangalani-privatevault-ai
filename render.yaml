@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: privatevault-agents
+    env: static
+    buildCommand: echo "no build"
+    staticPublishPath: public
+    autoDeploy: true
